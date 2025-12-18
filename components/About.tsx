@@ -75,7 +75,7 @@ export default function About() {
             </h3>
             <p className="text-gray-300 text-lg leading-relaxed mb-6">
               OutoVox is a leading software house dedicated to transforming businesses through innovative 
-              technology solutions. Founded in 2019, we've grown from a small startup to a trusted partner 
+              technology solutions. Founded in 2019, we&apos;ve grown from a small startup to a trusted partner 
               for companies worldwide.
             </p>
             <p className="text-gray-300 text-lg leading-relaxed">

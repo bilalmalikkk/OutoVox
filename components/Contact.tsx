@@ -69,7 +69,7 @@ export default function Contact() {
             Get In <span className="text-white">Touch</span>
           </h2>
           <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-            Let's discuss how we can help transform your business
+            Let&apos;s discuss how we can help transform your business
           </p>
         </div>
 
@@ -151,7 +151,7 @@ export default function Contact() {
 
               {status === 'success' && (
                 <div className="p-4 bg-green-500/20 border border-green-500/50 rounded-lg text-green-400 text-center">
-                  Message sent successfully! We'll get back to you soon.
+                  Message sent successfully! We&apos;ll get back to you soon.
                 </div>
               )}
             </form>
