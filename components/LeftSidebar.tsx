@@ -41,7 +41,7 @@ export default function LeftSidebar() {
 
       {/* Social Media Icons at Center */}
       <motion.div
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col gap-6 items-center"
+        className="absolute top-[35%] left-1/2 -translate-x-1/2 flex flex-col gap-6 items-center"
         initial={{ opacity: 0, x: -20 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.8, delay: 0.5 }}

@@ -2,6 +2,8 @@
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
+import Link from 'next/link';
+import { Mail } from 'lucide-react';
 
 interface RightSidebarProps {
   isSidebarOpen: boolean;
@@ -59,41 +61,70 @@ export default function RightSidebar({ isSidebarOpen, setIsSidebarOpen }: RightS
         />
       </motion.button>
 
-      {/* Contact Us and Icon at Center */}
+      {/* Contact Us Section - Expanded Layout */}
       <motion.div
-        className="absolute top-1/2 right-1/2 translate-x-1/2 -translate-y-1/2 flex flex-col items-center gap-6"
+        className="absolute top-[28%] right-1/2 translate-x-1/2 flex flex-col items-center gap-8"
         initial={{ opacity: 0, x: 20 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.8, delay: 0.5 }}
       >
-        <motion.a
-          href="#contact"
-          className="text-white hover:text-gray-300 transition-colors"
-          style={{ writingMode: 'vertical-rl', textOrientation: 'mixed' }}
-          whileHover={{ scale: 1.1 }}
+        {/* Decorative Line */}
+        <motion.div
+          className="h-16 w-px bg-white/30"
+          initial={{ scaleY: 0 }}
+          animate={{ scaleY: 1 }}
+          transition={{ delay: 0.6, duration: 0.6 }}
+        />
+        
+        {/* Contact Us Text and Icon Group */}
+        <motion.div
+          className="flex flex-col items-center gap-3"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.7 }}
         >
-          contact us
-        </motion.a>
-        <motion.a
-          href="#contact"
-          initial={{ opacity: 0, scale: 0 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 0.9 }}
-          whileHover={{ scale: 1.1 }}
-        >
-          <svg
-            className="w-6 h-6 text-white"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
+          {/* Contact Us Text */}
+          <motion.div
+            className="group relative"
+            whileHover={{ scale: 1.05 }}
           >
-            <rect x="3" y="3" width="18" height="18" rx="2" strokeWidth="2"/>
-            <path d="M12 8v8M8 12h8" strokeWidth="2" strokeLinecap="round"/>
-          </svg>
-        </motion.a>
+            <Link 
+              href="/contact"
+              className="text-white hover:text-gray-300 transition-colors font-semibold tracking-wider"
+              style={{ writingMode: 'vertical-rl', textOrientation: 'mixed' }}
+            >
+              contact us
+            </Link>
+            {/* Hover underline effect */}
+            <motion.div
+              className="absolute -right-2 top-0 h-full w-0.5 bg-white opacity-0 group-hover:opacity-100 transition-opacity"
+              initial={{ scaleY: 0 }}
+              whileHover={{ scaleY: 1 }}
+              transition={{ duration: 0.3 }}
+            />
+          </motion.div>
+
+          {/* Icon without border */}
+          <motion.div
+            className="relative group"
+            initial={{ opacity: 0, scale: 0 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.9, type: 'spring', stiffness: 200 }}
+            whileHover={{ scale: 1.15 }}
+          >
+            <Link href="/contact" className="block">
+              <Mail className="w-6 h-6 text-white group-hover:scale-110 transition-transform duration-300" strokeWidth={2} />
+            </Link>
+          </motion.div>
+        </motion.div>
+
+        {/* Decorative Line */}
+        <motion.div
+          className="h-16 w-px bg-white/30"
+          initial={{ scaleY: 0 }}
+          animate={{ scaleY: 1 }}
+          transition={{ delay: 1.0, duration: 0.6 }}
+        />
       </motion.div>
     </div>
   );

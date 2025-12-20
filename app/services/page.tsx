@@ -4,13 +4,10 @@ import { useState, useEffect } from 'react';
 import Navbar from '@/components/Navbar';
 import LeftSidebar from '@/components/LeftSidebar';
 import RightSidebar from '@/components/RightSidebar';
-import Hero from '@/components/Hero';
-import FeaturedServices from '@/components/FeaturedServices';
-import WhyChooseUs from '@/components/WhyChooseUs';
-import CTA from '@/components/CTA';
+import Services from '@/components/Services';
 import Footer from '@/components/Footer';
 
-export default function Home() {
+export default function ServicesPage() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   useEffect(() => {
@@ -22,10 +19,9 @@ export default function Home() {
       <Navbar isSidebarOpen={isSidebarOpen} setIsSidebarOpen={setIsSidebarOpen} />
       <LeftSidebar />
       <RightSidebar isSidebarOpen={isSidebarOpen} setIsSidebarOpen={setIsSidebarOpen} />
-      <Hero />
-      <FeaturedServices />
-      <WhyChooseUs />
-      <CTA />
+      <div className="pt-20">
+        <Services />
+      </div>
       <Footer />
     </main>
   );

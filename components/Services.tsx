@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
 import { useRef } from 'react';
+import Link from 'next/link';
 
 export default function Services() {
   const services = [
@@ -152,14 +153,17 @@ export default function Services() {
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
           transition={{ delay: 0.6, duration: 0.8 }}
         >
-          <motion.a
-            href="#contact"
-            className="inline-block px-8 py-4 bg-white text-black font-semibold hover:bg-gray-200 transition-all duration-300"
+          <motion.div
             whileHover={{ scale: 1.05, y: -2 }}
             whileTap={{ scale: 0.95 }}
           >
-            Start Your Project
-          </motion.a>
+            <Link
+              href="/contact"
+              className="inline-block px-8 py-4 bg-white text-black font-semibold hover:bg-gray-200 transition-all duration-300"
+            >
+              Start Your Project
+            </Link>
+          </motion.div>
         </motion.div>
       </div>
     </section>

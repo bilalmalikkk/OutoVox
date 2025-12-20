@@ -151,3 +151,21 @@ a {
   color: #22d3ee;
 }
 
+/* Horizontal Scrolling Animation */
+@keyframes scroll-horizontal {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-scroll-horizontal {
+  animation: scroll-horizontal 30s linear infinite;
+}
+
+.scroll-container:hover .animate-scroll-horizontal {
+  animation-play-state: paused;
+}
+

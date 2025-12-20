@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { Linkedin, Twitter, Github, Instagram } from 'lucide-react';
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -187,28 +188,23 @@ export default function Contact() {
               
               <div className="flex gap-4">
                 {[
-                  { name: 'LinkedIn', icon: '💼', link: '#' },
-                  { name: 'Twitter', icon: '🐦', link: '#' },
-                  { name: 'GitHub', icon: '💻', link: '#' },
-                  { name: 'Instagram', icon: '📸', link: '#' },
-                ].map((social, index) => (
-                  <a
-                    key={index}
-                    href={social.link}
-                    className="w-14 h-14 flex items-center justify-center bg-black border border-white/20 rounded-lg text-2xl hover:bg-white hover:text-black transition-all duration-300 hover:scale-110"
-                    title={social.name}
-                  >
-                    {social.icon}
-                  </a>
-                ))}
-              </div>
-            </div>
-
-            {/* Map Placeholder */}
-            <div className="bg-gradient-to-br from-gray-900/50 to-black/50 backdrop-blur-sm border border-primary-500/20 rounded-2xl p-8 h-64 flex items-center justify-center">
-              <div className="text-center text-gray-400">
-                <div className="text-6xl mb-4">🗺️</div>
-                <div>Map Location</div>
+                  { name: 'LinkedIn', icon: Linkedin, link: '#' },
+                  { name: 'Twitter', icon: Twitter, link: '#' },
+                  { name: 'GitHub', icon: Github, link: '#' },
+                  { name: 'Instagram', icon: Instagram, link: '#' },
+                ].map((social, index) => {
+                  const IconComponent = social.icon;
+                  return (
+                    <a
+                      key={index}
+                      href={social.link}
+                      className="group w-14 h-14 flex items-center justify-center bg-black border border-white/20 rounded-lg hover:bg-white transition-all duration-300 hover:scale-110"
+                      title={social.name}
+                    >
+                      <IconComponent className="w-6 h-6 text-white group-hover:text-black transition-colors" strokeWidth={2} />
+                    </a>
+                  );
+                })}
               </div>
             </div>
           </div>

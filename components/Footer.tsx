@@ -1,18 +1,20 @@
+import Link from 'next/link';
+
 export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   const footerLinks = {
     company: [
-      { label: 'About Us', href: '#about' },
-      { label: 'Services', href: '#services' },
-      { label: 'Portfolio', href: '#portfolio' },
-      { label: 'Contact', href: '#contact' },
+      { label: 'About Us', href: '/about' },
+      { label: 'Services', href: '/services' },
+      { label: 'Portfolio', href: '/portfolio' },
+      { label: 'Contact', href: '/contact' },
     ],
     services: [
-      { label: 'Web Development', href: '#services' },
-      { label: 'Mobile Apps', href: '#services' },
-      { label: 'Cloud Solutions', href: '#services' },
-      { label: 'UI/UX Design', href: '#services' },
+      { label: 'Web Development', href: '/services' },
+      { label: 'Mobile Apps', href: '/services' },
+      { label: 'Cloud Solutions', href: '/services' },
+      { label: 'UI/UX Design', href: '/services' },
     ],
     legal: [
       { label: 'Privacy Policy', href: '#' },
@@ -32,20 +34,9 @@ export default function Footer() {
               <div className="w-10 h-10 bg-white rounded-sm"></div>
               <span className="text-2xl font-bold text-white">OutoVox</span>
             </div>
-            <p className="text-gray-400 mb-4">
+            <p className="text-gray-400">
               Transforming businesses through innovative technology solutions.
             </p>
-            <div className="flex gap-3">
-              {['💼', '🐦', '💻', '📸'].map((icon, index) => (
-                <a
-                  key={index}
-                  href="#"
-                  className="w-10 h-10 flex items-center justify-center bg-black border border-white/20 rounded-lg hover:bg-white hover:text-black transition-all duration-300"
-                >
-                  {icon}
-                </a>
-              ))}
-            </div>
           </div>
 
           {/* Company Links */}
@@ -54,12 +45,12 @@ export default function Footer() {
             <ul className="space-y-2">
               {footerLinks.company.map((link, index) => (
                 <li key={index}>
-                  <a
+                  <Link
                     href={link.href}
                     className="text-gray-400 hover:text-white transition-colors"
                   >
                     {link.label}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -71,12 +62,12 @@ export default function Footer() {
             <ul className="space-y-2">
               {footerLinks.services.map((link, index) => (
                 <li key={index}>
-                  <a
+                  <Link
                     href={link.href}
                     className="text-gray-400 hover:text-white transition-colors"
                   >
                     {link.label}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -102,7 +93,7 @@ export default function Footer() {
 
         {/* Bottom Bar */}
         <div className="pt-8 border-t border-white/10 text-center text-gray-400">
-          <p>© {currentYear} OutoVox. All rights reserved. Built with ❤️ and cutting-edge technology.</p>
+          <p>© {currentYear} OutoVox. All rights reserved.</p>
         </div>
       </div>
 

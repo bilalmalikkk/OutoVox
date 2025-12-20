@@ -87,11 +87,11 @@ export default function Navbar({ isSidebarOpen, setIsSidebarOpen }: NavbarProps)
   }, [isSidebarOpen]);
 
   const navLinks = [
-    { href: '#home', label: 'Home' },
-    { href: '#services', label: 'Services' },
-    { href: '#portfolio', label: 'Portfolio' },
-    { href: '#about', label: 'About' },
-    { href: '#contact', label: 'Contact' },
+    { href: '/', label: 'Home' },
+    { href: '/services', label: 'Services' },
+    { href: '/portfolio', label: 'Portfolio' },
+    { href: '/about', label: 'About' },
+    { href: '/contact', label: 'Contact' },
   ];
 
   return (
@@ -190,7 +190,7 @@ export default function Navbar({ isSidebarOpen, setIsSidebarOpen }: NavbarProps)
                 <div className="flex justify-between items-center mb-12 pt-8">
                   {/* Logo in Menu */}
                   <Link
-                    href="#home"
+                    href="/"
                     onClick={() => setIsSidebarOpen(false)}
                     className="flex items-center space-x-3 group"
                   >
@@ -249,7 +249,7 @@ export default function Navbar({ isSidebarOpen, setIsSidebarOpen }: NavbarProps)
                   transition={{ delay: 0.9, duration: 0.6 }}
                 >
                   <Link
-                    href="#contact"
+                    href="/contact"
                     onClick={() => setIsSidebarOpen(false)}
                     className="inline-block px-8 py-4 bg-white text-black font-semibold hover:bg-gray-200 transition-colors text-lg"
                   >
