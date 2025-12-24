@@ -30,9 +30,24 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
           {/* Brand */}
           <div>
-            <div className="flex items-center space-x-2 mb-4">
-              <div className="w-10 h-10 bg-white rounded-sm"></div>
-              <span className="text-2xl font-bold text-white">OutoVox</span>
+            <div className="mb-4">
+              <div className="text-sm font-semibold text-white flex items-center tracking-wide">
+                {/* First O as power button */}
+                <span className="relative inline-flex items-center justify-center w-3.5 h-3.5 mr-1">
+                  <svg className="w-full h-full" viewBox="0 0 24 24" fill="none">
+                    <circle cx="12" cy="12" r="10" stroke="white" strokeWidth="2" />
+                    <path d="M12 8v8" stroke="#06b6d4" strokeWidth="2" strokeLinecap="round" />
+                  </svg>
+                </span>
+                {/* UTOVO */}
+                <span>UTOVO</span>
+                {/* Final X with split color */}
+                <span className="relative inline-block ml-0.5">
+                  <span className="text-white opacity-0">X</span>
+                  <span className="absolute left-0 top-0 text-white" style={{ clipPath: 'polygon(0 0, 50% 0, 50% 100%, 0 100%)' }}>X</span>
+                  <span className="absolute left-0 top-0 text-cyan-400" style={{ clipPath: 'polygon(50% 0, 100% 0, 100% 100%, 50% 100%)' }}>X</span>
+                </span>
+              </div>
             </div>
             <p className="text-gray-400">
               Transforming businesses through innovative technology solutions.
