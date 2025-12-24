@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Linkedin, Twitter, Github, Instagram } from 'lucide-react';
+import { Linkedin, Twitter, Github, Instagram, Mail, Phone, MapPin, Clock } from 'lucide-react';
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -32,25 +32,25 @@ export default function Contact() {
 
   const contactInfo = [
     {
-      icon: '📧',
+      icon: Mail,
       title: 'Email',
       value: 'hello@outovox.com',
       link: 'mailto:hello@outovox.com',
     },
     {
-      icon: '📱',
+      icon: Phone,
       title: 'Phone',
       value: '+1 (555) 123-4567',
       link: 'tel:+15551234567',
     },
     {
-      icon: '📍',
+      icon: MapPin,
       title: 'Location',
       value: 'Silicon Valley, CA',
       link: '#',
     },
     {
-      icon: '⏰',
+      icon: Clock,
       title: 'Working Hours',
       value: 'Mon-Fri: 9AM-6PM',
       link: '#',
@@ -164,21 +164,26 @@ export default function Contact() {
               <h3 className="text-2xl font-bold mb-6">Contact Information</h3>
               
               <div className="space-y-6">
-                {contactInfo.map((info, index) => (
-                  <a
-                    key={index}
-                    href={info.link}
-                    className="flex items-start space-x-4 p-4 rounded-lg hover:bg-white/5 transition-colors group"
-                  >
-                    <div className="text-3xl">{info.icon}</div>
-                    <div>
-                      <div className="text-sm text-gray-400 mb-1">{info.title}</div>
-                      <div className="text-white group-hover:text-primary-400 transition-colors">
-                        {info.value}
+                {contactInfo.map((info, index) => {
+                  const IconComponent = info.icon;
+                  return (
+                    <a
+                      key={index}
+                      href={info.link}
+                      className="flex items-start space-x-4 p-4 rounded-lg hover:bg-white/5 transition-colors group"
+                    >
+                      <div className="flex-shrink-0">
+                        <IconComponent className="w-8 h-8 text-cyan-400" strokeWidth={1.5} />
                       </div>
-                    </div>
-                  </a>
-                ))}
+                      <div>
+                        <div className="text-sm text-gray-400 mb-1">{info.title}</div>
+                        <div className="text-white group-hover:text-primary-400 transition-colors">
+                          {info.value}
+                        </div>
+                      </div>
+                    </a>
+                  );
+                })}
               </div>
             </div>
 
