@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useInView } from 'framer-motion';
 import { useRef } from 'react';
+import { ShoppingBag, HeartPulse, BarChart3, MessageCircle, Activity, UtensilsCrossed } from 'lucide-react';
 
 export default function Portfolio() {
   const [activeFilter, setActiveFilter] = useState('All');
@@ -15,7 +16,7 @@ export default function Portfolio() {
       title: 'E-Commerce Platform',
       category: 'E-commerce',
       description: 'A modern online shopping platform with real-time inventory and payment integration.',
-      image: '🛍️',
+      icon: ShoppingBag,
       tags: ['React', 'Node.js', 'MongoDB', 'Stripe'],
       color: 'from-blue-500 to-cyan-500',
     },
@@ -23,7 +24,7 @@ export default function Portfolio() {
       title: 'Healthcare App',
       category: 'Mobile Apps',
       description: 'Mobile application for patient management and telemedicine consultations.',
-      image: '🏥',
+      icon: HeartPulse,
       tags: ['React Native', 'Firebase', 'WebRTC'],
       color: 'from-green-500 to-emerald-500',
     },
@@ -31,7 +32,7 @@ export default function Portfolio() {
       title: 'AI Analytics Dashboard',
       category: 'AI/ML',
       description: 'Advanced analytics platform with machine learning predictions.',
-      image: '📊',
+      icon: BarChart3,
       tags: ['Python', 'TensorFlow', 'React', 'D3.js'],
       color: 'from-purple-500 to-pink-500',
     },
@@ -39,7 +40,7 @@ export default function Portfolio() {
       title: 'Social Media Platform',
       category: 'Web Apps',
       description: 'A scalable social networking application with real-time features.',
-      image: '💬',
+      icon: MessageCircle,
       tags: ['Next.js', 'GraphQL', 'PostgreSQL', 'Redis'],
       color: 'from-orange-500 to-red-500',
     },
@@ -47,7 +48,7 @@ export default function Portfolio() {
       title: 'Fitness Tracker',
       category: 'Mobile Apps',
       description: 'Cross-platform fitness app with workout tracking and nutrition planning.',
-      image: '💪',
+      icon: Activity,
       tags: ['Flutter', 'Firebase', 'ML Kit'],
       color: 'from-teal-500 to-blue-500',
     },
@@ -55,7 +56,7 @@ export default function Portfolio() {
       title: 'Restaurant Management',
       category: 'Web Apps',
       description: 'Complete restaurant management system with POS and inventory.',
-      image: '🍽️',
+      icon: UtensilsCrossed,
       tags: ['Vue.js', 'Laravel', 'MySQL'],
       color: 'from-yellow-500 to-orange-500',
     },
@@ -165,7 +166,10 @@ export default function Portfolio() {
               >
               {/* Project Image/Icon */}
               <div className="relative h-48 bg-white/5 flex items-center justify-center">
-                <span className="text-8xl">{project.image}</span>
+                {(() => {
+                  const IconComponent = project.icon;
+                  return <IconComponent className="w-24 h-24 text-cyan-400" strokeWidth={1.5} />;
+                })()}
                 <div className="absolute inset-0 bg-black/40 group-hover:bg-black/60 transition-colors duration-300"></div>
               </div>
 

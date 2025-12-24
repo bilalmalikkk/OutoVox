@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -14,6 +14,7 @@ export default function Navbar({ isSidebarOpen, setIsSidebarOpen }: NavbarProps)
   const [clipRadius, setClipRadius] = useState(0);
   const [clipCenter, setClipCenter] = useState('50% 50%');
   const [isHovered, setIsHovered] = useState(false);
+  const menuRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -26,60 +27,72 @@ export default function Navbar({ isSidebarOpen, setIsSidebarOpen }: NavbarProps)
   useEffect(() => {
     if (isSidebarOpen) {
       document.body.style.overflow = 'hidden';
-      // Get hamburger position from right sidebar (desktop) or top nav (mobile)
-      const getHamburgerPosition = () => {
-        // Try to find hamburger in right sidebar first (desktop)
-        const rightSidebarHamburger = document.querySelector('[data-hamburger="true"]') as HTMLElement;
-        if (rightSidebarHamburger) {
-          const rect = rightSidebarHamburger.getBoundingClientRect();
-          return {
-            x: rect.left + rect.width / 2,
-            y: rect.top + rect.height / 2,
-          };
-        }
-        // Fallback to mobile hamburger
-        const mobileHamburger = document.querySelector('[data-mobile-hamburger="true"]') as HTMLElement;
-        if (mobileHamburger) {
-          const rect = mobileHamburger.getBoundingClientRect();
-          return {
-            x: rect.left + rect.width / 2,
-            y: rect.top + rect.height / 2,
-          };
-        }
-        // Default to top right
-        return { x: window.innerWidth - 40, y: 40 };
-      };
-
-      const pos = getHamburgerPosition();
-      setClipCenter(`${pos.x}px ${pos.y}px`);
       
-      const maxDistance = Math.sqrt(
-        Math.max(
-          Math.pow(pos.x, 2) + Math.pow(pos.y, 2),
-          Math.pow(window.innerWidth - pos.x, 2) + Math.pow(pos.y, 2),
-          Math.pow(pos.x, 2) + Math.pow(window.innerHeight - pos.y, 2),
-          Math.pow(window.innerWidth - pos.x, 2) + Math.pow(window.innerHeight - pos.y, 2)
-        )
-      );
+      // Small delay to ensure menu element is rendered and positioned
+      setTimeout(() => {
+        if (!menuRef.current) return;
+        
+        const menuRect = menuRef.current.getBoundingClientRect();
+        
+        // Get hamburger position from right sidebar (desktop) or top nav (mobile)
+        const getHamburgerPosition = () => {
+          // Try to find hamburger in right sidebar first (desktop)
+          const rightSidebarHamburger = document.querySelector('[data-hamburger="true"]') as HTMLElement;
+          if (rightSidebarHamburger) {
+            const rect = rightSidebarHamburger.getBoundingClientRect();
+            // Calculate position relative to menu element
+            return {
+              x: rect.left + rect.width / 2 - menuRect.left,
+              y: rect.top + rect.height / 2 - menuRect.top,
+            };
+          }
+          // Fallback to mobile hamburger
+          const mobileHamburger = document.querySelector('[data-mobile-hamburger="true"]') as HTMLElement;
+          if (mobileHamburger) {
+            const rect = mobileHamburger.getBoundingClientRect();
+            return {
+              x: rect.left + rect.width / 2 - menuRect.left,
+              y: rect.top + rect.height / 2 - menuRect.top,
+            };
+          }
+          // Default to top right (relative to menu)
+          return { x: menuRect.width - 40, y: 40 };
+        };
 
-      // Animate from 0 to maxDistance
-      let radius = 0;
-      const duration = 800;
-      const startTime = Date.now();
-      const animate = () => {
-        const elapsed = Date.now() - startTime;
-        const progress = Math.min(elapsed / duration, 1);
-        // Use easing function for smooth animation
-        const eased = 1 - Math.pow(1 - progress, 3);
-        radius = maxDistance * eased;
-        setClipRadius(radius);
-        if (progress < 1) {
-          requestAnimationFrame(animate);
-        } else {
-          setClipRadius(maxDistance + 100); // Ensure full coverage
-        }
-      };
-      animate();
+        const pos = getHamburgerPosition();
+        setClipCenter(`${pos.x}px ${pos.y}px`);
+        
+        const menuWidth = menuRect.width;
+        const menuHeight = menuRect.height;
+        
+        const maxDistance = Math.sqrt(
+          Math.max(
+            Math.pow(pos.x, 2) + Math.pow(pos.y, 2),
+            Math.pow(menuWidth - pos.x, 2) + Math.pow(pos.y, 2),
+            Math.pow(pos.x, 2) + Math.pow(menuHeight - pos.y, 2),
+            Math.pow(menuWidth - pos.x, 2) + Math.pow(menuHeight - pos.y, 2)
+          )
+        );
+
+        // Animate from 0 to maxDistance
+        let radius = 0;
+        const duration = 800;
+        const startTime = Date.now();
+        const animate = () => {
+          const elapsed = Date.now() - startTime;
+          const progress = Math.min(elapsed / duration, 1);
+          // Use easing function for smooth animation
+          const eased = 1 - Math.pow(1 - progress, 3);
+          radius = maxDistance * eased;
+          setClipRadius(radius);
+          if (progress < 1) {
+            requestAnimationFrame(animate);
+          } else {
+            setClipRadius(maxDistance + 100); // Ensure full coverage
+          }
+        };
+        animate();
+      }, 10);
     } else {
       document.body.style.overflow = 'unset';
       setClipRadius(0);
@@ -174,9 +187,10 @@ export default function Navbar({ isSidebarOpen, setIsSidebarOpen }: NavbarProps)
       <AnimatePresence>
         {isSidebarOpen && (
           <>
-            {/* Full Screen Menu with Circular Clip */}
+            {/* Full Screen Menu with Circular Clip - Only covers central area on desktop */}
             <motion.aside
-              className="fixed inset-0 bg-black z-50 overflow-y-auto"
+              ref={menuRef}
+              className="fixed top-0 bottom-0 left-0 right-0 lg:left-32 lg:right-32 bg-black z-30 overflow-y-auto"
               style={{
                 clipPath: `circle(${clipRadius}px at ${clipCenter})`,
               }}
@@ -185,31 +199,7 @@ export default function Navbar({ isSidebarOpen, setIsSidebarOpen }: NavbarProps)
               exit={{ opacity: 0 }}
               transition={{ duration: 0.3 }}
             >
-              <div className="flex flex-col h-full p-8 max-w-7xl mx-auto">
-                {/* Header with Hamburger Close Button */}
-                <div className="flex justify-between items-center mb-12 pt-8">
-                  {/* Logo in Menu */}
-                  <Link
-                    href="/"
-                    onClick={() => setIsSidebarOpen(false)}
-                    className="flex items-center space-x-3 group"
-                  >
-                    <div className="w-10 h-10 bg-white rounded-sm transform group-hover:rotate-90 transition-transform duration-500"></div>
-                    <span className="text-2xl font-bold text-white">OutoVox</span>
-                  </Link>
-
-                  {/* Close Button */}
-                  <button
-                    onClick={() => setIsSidebarOpen(false)}
-                    className="relative w-10 h-10 flex items-center justify-center group"
-                    aria-label="Close menu"
-                  >
-                    <span className="absolute w-6 h-0.5 bg-white transform transition-all duration-300 rotate-45"></span>
-                    <span className="absolute w-6 h-0.5 bg-white transform transition-all duration-300 -rotate-45"></span>
-                  </button>
-                </div>
-
-
+              <div className="flex flex-col h-full p-8 max-w-7xl mx-auto pt-32 lg:pt-36">
                 {/* Navigation Links */}
                 <nav className="flex-1">
                   <motion.ul

@@ -4,41 +4,42 @@ import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
 import { useRef } from 'react';
 import Link from 'next/link';
+import { Code2, Smartphone, Layers, Palette, Cpu, Shield } from 'lucide-react';
 
 export default function Services() {
   const services = [
     {
-      icon: '💻',
+      icon: Code2,
       title: 'Web Development',
       description: 'Custom web applications built with modern technologies like React, Next.js, and Node.js.',
       features: ['Responsive Design', 'SEO Optimized', 'Fast Performance', 'Scalable Architecture'],
     },
     {
-      icon: '📱',
+      icon: Smartphone,
       title: 'Mobile Development',
       description: 'Native and cross-platform mobile apps for iOS and Android that deliver exceptional user experiences.',
       features: ['Native iOS/Android', 'React Native', 'Flutter', 'Progressive Web Apps'],
     },
     {
-      icon: '☁️',
+      icon: Layers,
       title: 'Cloud Solutions',
       description: 'Scalable cloud infrastructure and deployment solutions for modern applications.',
       features: ['AWS & Azure', 'DevOps', 'CI/CD Pipelines', 'Microservices'],
     },
     {
-      icon: '🎨',
+      icon: Palette,
       title: 'UI/UX Design',
       description: 'Beautiful, intuitive interfaces that enhance user engagement and satisfaction.',
       features: ['User Research', 'Prototyping', 'Design Systems', 'Usability Testing'],
     },
     {
-      icon: '🤖',
+      icon: Cpu,
       title: 'AI & Machine Learning',
       description: 'Intelligent solutions powered by artificial intelligence and machine learning algorithms.',
       features: ['Predictive Analytics', 'Natural Language Processing', 'Computer Vision', 'Automation'],
     },
     {
-      icon: '🔒',
+      icon: Shield,
       title: 'Cybersecurity',
       description: 'Comprehensive security solutions to protect your digital assets and user data.',
       features: ['Security Audits', 'Penetration Testing', 'Compliance', 'Threat Detection'],
@@ -107,8 +108,11 @@ export default function Services() {
               transition={{ type: 'spring', stiffness: 300 }}
             >
               {/* Icon */}
-              <div className="text-6xl mb-6 transform group-hover:scale-110 transition-transform duration-300">
-                {service.icon}
+              <div className="mb-6 transform group-hover:scale-110 transition-transform duration-300">
+                {(() => {
+                  const IconComponent = service.icon;
+                  return <IconComponent className="w-16 h-16 text-cyan-400" strokeWidth={1.5} />;
+                })()}
               </div>
 
               {/* Title */}

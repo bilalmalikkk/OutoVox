@@ -1,5 +1,7 @@
 'use client';
 
+import { Target, Users, Zap, Sparkles } from 'lucide-react';
+
 export default function About() {
   const team = [
     {
@@ -30,22 +32,22 @@ export default function About() {
 
   const values = [
     {
-      icon: '🎯',
+      icon: Target,
       title: 'Innovation',
       description: 'We stay ahead of the curve with cutting-edge technologies',
     },
     {
-      icon: '🤝',
+      icon: Users,
       title: 'Collaboration',
       description: 'We work closely with clients to achieve their goals',
     },
     {
-      icon: '⚡',
+      icon: Zap,
       title: 'Excellence',
       description: 'We deliver high-quality solutions that exceed expectations',
     },
     {
-      icon: '🌟',
+      icon: Sparkles,
       title: 'Integrity',
       description: 'We build trust through transparency and honesty',
     },
@@ -92,16 +94,21 @@ export default function About() {
             Our <span className="gradient-text">Values</span>
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {values.map((value, index) => (
-              <div
-                key={index}
-                className="bg-black border border-white/10 rounded-2xl p-6 text-center hover:border-white/30 transition-all duration-300 hover:scale-105"
-              >
-                <div className="text-5xl mb-4">{value.icon}</div>
-                <h4 className="text-xl font-bold mb-3 text-white">{value.title}</h4>
-                <p className="text-gray-400">{value.description}</p>
-              </div>
-            ))}
+            {values.map((value, index) => {
+              const IconComponent = value.icon;
+              return (
+                <div
+                  key={index}
+                  className="bg-black border border-white/10 rounded-2xl p-6 text-center hover:border-white/30 transition-all duration-300 hover:scale-105"
+                >
+                  <div className="flex justify-center mb-4">
+                    <IconComponent className="w-12 h-12 text-cyan-400" strokeWidth={1.5} />
+                  </div>
+                  <h4 className="text-xl font-bold mb-3 text-white">{value.title}</h4>
+                  <p className="text-gray-400">{value.description}</p>
+                </div>
+              );
+            })}
           </div>
         </div>
 
